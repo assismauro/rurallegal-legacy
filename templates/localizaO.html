@@ -1,0 +1,52 @@
+﻿<ion-view>
+    <ion-nav-title>Localização</ion-nav-title>
+
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <form class="list locationForm">
+
+            <div style="text-align:center;" class="show-list-numbers-and-dots">
+                <p on-touch="linkHelp(19)" class="helpPhrase">Informe sua localização:</p>
+            </div>
+            <label class="item item-{{selectMunicipio}} localidade">
+              <span class="input-label"><a on-tap="linkHelp(5)">Município</a></span>
+
+              <select ng-show="iOS" ng-model="municipio.nome" ng-options="i.nm for i in listas.cidades track by i.id" ng-change="getFitoecologias()"></select>
+
+              <input type="text" ng-hide="iOS" ng-model="municipio.nome.nm" list="municipiosSP" ng-change="getFitoecologias()" />
+              <datalist id="municipiosSP">
+                <option ng-repeat="i in listas.cidades">{{i.nm}}</option>
+              </datalist>       
+            
+          </label>
+            <label class="item item-select item-text-wrap localidade">
+              <span class="input-label"><a on-tap="linkHelp(20)">R. Fitoecológica</a></span>
+              <select ng-options="i.nm for i in listas.fitos track by i.id" ng-model="municipio.fitoecologia" ng-change="getPolygon()"></select>
+          </label>
+
+            <label class="item item-input localidade">
+              <span class="input-label"><a on-tap="linkHelp(21)">Coordenadas</a></span>
+              <input placeholder="lat / lon" type="text" ng-model="coordenadas">
+          </label>
+        </form>
+
+        <label class="locationWrapper">
+          <button class="button button-light" on-tap="markerFromText(coordenadas)">
+              <i class="ion-compose gpsNow"></i>
+          </button>
+          <button class="button button-light" style="margin-left:10px;margin-right:10px;" on-tap="markerFromMap()">
+              <i class="ion-map gpsNow"></i>
+          </button>
+          <button class="button button-light" on-tap="markerFromGPS()">
+              <i class="ion-android-locate gpsNow"></i>
+          </button>
+      </label>
+
+        <div id="map" class="map"></div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="assignLocation(); bg = 'buttonStyleClicked'" on-release="bg=''">OK</a>
+
+    </ion-content>
+</ion-view>

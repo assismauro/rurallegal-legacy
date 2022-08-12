@@ -1,0 +1,124 @@
+<ion-view>
+    <ion-nav-title align-title="center">Monta croqui</ion-nav-title>
+    <ion-content padding="false" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="row" style="height:90vh;max-height:90vh;min-height:90vh">
+            <div class="col" style="width:30vw;max-width:30vw">
+
+                <div>
+                    <div style="text-align:center"><b>{{SAF.tempo.intervalo.view}}s</b></div>
+                    <ion-scroll direction="x" class="scrollable-list" style="min-width:100%">
+                        <div class="button-bar"><a ng-repeat="i in SAF.horizonte" class="button button-stable" on-tap="setPeriodo(i)" ng-style="corBotaoAgora(i)">{{i}}</a></div>
+                    </ion-scroll>
+                </div>
+
+                <div>
+                    <div style="text-align:center">Espécies - <b>{{SAF.tempo.intervalo.view}} {{periodo}}</b> </div>
+                    <ion-scroll zooming="false" direction="y" class="scrollable-list" style="max-height:30vh">
+                        <ul class="list">
+                            <li ng-repeat="esp in SAF.especies | filter: filtroEspecieAno" style="text-align:left;background-color:{{selectedEspecieCor[$index]}}" class="item item-text-wrap" on-tap="selectEspecie($index, esp.idEspecie)">
+                                <i class="icon ion-leaf" style="color:{{esp.cor}};font-size:24px" ng-hide="temIcone(esp.hashFigura)"></i> 
+
+                                <img ng-src="{{esp.hashFigura}}" alt="" style="max-height:28px;" ng-show="temIcone(esp.hashFigura)" />
+
+                                &nbsp; {{esp.nomComum}}
+                            </li>
+                        </ul>
+                    </ion-scroll>
+                </div>
+
+                <div>
+                    <div style="text-align:center;font-weight:bold">Em foco</div>
+
+                    <ion-scroll zooming="false" direction="y" class="scrollable-list" style="max-height:25vh">
+                        <dl ng-hide="!especie[periodo]">
+                            <dt><i class="icon ion-leaf" style="color:{{especie[periodo].cor}}"></i> &nbsp; {{especie[periodo].nomComum}}</dt>
+                            <dd class="descritorEspecie" ng-bind-html="formataNomCientifico(especie[periodo].nomCientifico)"></dd>
+
+                            <dt>Estrato:</dt>
+                            <dd class="descritorEspecie">{{especie[periodo].nomCaracteristica}}</dd>
+
+                            <dt>Ciclo:</dt>
+                            <dd class="descritorEspecie">{{especie[periodo].CicloMaximo * 12 / SAF.tempo.intervalo.n}} {{SAF.tempo.intervalo.view.toLowerCase()}}(s)</dd>
+
+                            <dt>{{SAF.tempo.intervalo.view}}(s) de plantio:</dt>
+                            <dd class="descritorEspecie">{{especie[periodo].periodos.join(', ')}}</dd>
+
+                            <!--dt>Espaço entre linhas:</dt>
+                            <dd class="descritorEspecie"> {{especie[periodo].espacoLinha}} m </dd>
+
+                            <dt>Espaço entre plantas:</dt>
+                            <dd class="descritorEspecie">{{especie[periodo].espacoPlanta}} m</dd-->
+
+                        </dl>
+
+                        <div ng-show="!especie[periodo]">Nenhuma espécie selecionada para plantio neste {{SAF.tempo.intervalo.view}}</div>
+                    </ion-scroll>
+
+                </div>
+
+                <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="avancaSAF();bg = 'buttonStyleClicked'" on-release="bg=''">OK</a>
+            </div>
+
+            <div style="border: 1px solid black;height:inherit;"></div>
+
+            <div class="col" ; style="width:68vw;max-width:68vw">
+
+                <ion-scroll zooming="false" direction="x" class="scrollable-list">
+                    <div style="display:inline-flex;height:50px;max-height:50px">
+                        <div class="item item-toggle">
+                            <i class="icon ion-trash-a" style="font-size:22px;margin-right:10px"></i> Remover
+                            <label class="toggle toggle-{{remMode.class}}">
+                                    <input type="checkbox" ng-model="remMode.active" ng-change="remModeConfig()" />
+                                    <div class="track" >
+                                        <div class="handle"></div>
+                                    </div>
+                                </label>
+                        </div>
+
+                        <div class="item">
+                            <i class="icon ion-arrow-swap" style="font-size:22px;margin-right:10px"></i> {{SAF.espaco.linhas}}m
+
+                            <i id="setaCova" class="icon ion-arrow-swap" style="font-size:22px;margin-right:10px;margin-left:20px;"></i> {{SAF.espaco.plantas}}m
+                        </div>
+
+                        <div class="item">
+                            <i class="icon ion-calendar" style="font-size:22px;margin-right:10px"></i> {{SAF.tempo.intervalo.view}} {{periodo}}
+                        </div>
+
+                        <div class="item">
+                            <i class="icon ion-social-buffer" style="font-size:22px;margin-right:10px"></i>
+                            <span style="margin-right:10px" ng-repeat="v in [11,12,13,14]" ng-bind-html="formataPercentualCopa(v)"></span>
+                        </div>
+                    </div>
+                </ion-scroll>
+
+                <ion-scroll zooming="true" direction="xy" class="scrollable-list" style="width:inherit;height:80vh;max-height:80vh;background-color:{{remMode.color}}">
+
+                    <div class="row croquiContainer">
+                        <div class="col croquiLine" ng-repeat="l in SAF.linhas" ng-style="corServico(l)">
+                            <div style="width:inherit;text-align:center;">
+                                L {{l.index+1}}
+                            </div>
+
+                            <div ng-repeat="p in SAF.plantas">
+                                <div class="croquiCells" on-tap="fillCova(l.index,p.index)" ng-bind-html="drawCova(l.index,p.index)"></div>
+                                <div class="croquiSpace" ng-hide="p.index == (SAF.plantas.length - 1)"></div>
+                            </div>
+
+                            <div style="width:inherit;text-align:center;margin-top:10px">
+                                <input style="width:20px;height:20px" type="checkbox" ng-model="l.servico" />
+                                <br /> SV
+                            </div>
+
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>

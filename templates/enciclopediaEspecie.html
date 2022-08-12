@@ -1,0 +1,92 @@
+﻿<ion-view>
+    <ion-nav-title>Espécie</ion-nav-title>
+
+    <ion-content padding="true" class="has-header">
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="nomeCientifico" ng-bind-html="latin"></div>
+        <div>{{relatorio.nomes.nomComumOutro}}</div>
+        <div>{{relatorio.nomes.nomFamilia}}</div>
+
+        <div>
+            <div class="imgArvore" ng-hide="hide.plant">
+                <img ng-src="{{figuras.plant.hashFigura}}" alt="Sem imagem" style="max-height:250px;max-width:70vw" />
+            </div>
+
+            <div ng-hide="hide.info" class="topicoTituloEspecie">Características:</div>
+
+            <div ng-hide="hide.info">
+                <ul style="list-style-type:disc;margin-left:20px">
+                    <li ng-repeat="i in relatorio.info | filter: mostraTopicoCaracteristica" style="margin-top:10px">{{i}}</li>
+                </ul>
+            </div>
+
+            <div ng-hide="hide.wood">
+                <div class="topicoTituloEspecie">Corte tangencial:</div>
+                <div style="width:100%;text-align:center">
+                    <img ng-src="{{figuras.wood.hashFigura}}" alt="Sem imagem" style="max-width:150px;margin:10px" />
+                </div>
+            </div>
+
+            <div class="topicoTituloEspecie"><span style="color:rgb(30, 218, 252)" on-tap="linkHelp(81)">Usos comuns:</span></div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="especieUso">Madeireiros</div>
+                    <div>
+                        <div ng-repeat="u in relatorio.uso | filter: {flaMadeireiro: 1} : true" style="width:100%;text-align:center">
+                            <div>{{u.nomTipoUso}}</div>
+                            <img ng-src="{{u.hashFigura}}" alt="" style="max-height:75px;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="especieUso">Não madeireiros</div>
+                    <div>
+                        <div ng-repeat="u in relatorio.uso | filter: {flaMadeireiro: 0} : true" style="width:100%;text-align:center">
+                            <div>{{u.nomTipoUso}}</div>
+                            <img ng-src="{{u.hashFigura}}" alt="" style="max-height:75px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-hide="hide.produto">
+                <div class="topicoTituloEspecie">Outras imagens:</div>
+
+                <div ng-repeat="f in figuras.produto" style="width:100%;text-align:center;">
+                    <img ng-src="{{f.hashFigura}}" alt="" style="max-height:150px;max-width:70vw;margin:10px" />
+                </div>
+
+            </div>
+
+            <div ng-hide="hide.links">
+                <div class="topicoTituloEspecie">Mais informações:</div>
+
+                <div ng-repeat="l in relatorio.links" style="margin:10px;font-size:18px">
+                    <a on-tap="abreLink(l)">{{l}}</a>
+                </div>
+            </div>
+
+            <div ng-hide="hide.refs">
+                <div class="topicoTituloEspecie">Fontes:</div>
+
+                <!--button class="button button-stable button-block" on-tap="mostraReferencias()">
+                    <i class="icon ion-arrow-up-b" ng-show="refClick"></i>
+                    <i class="icon ion-arrow-down-b" ng-hide="refClick"></i>
+                </button>
+
+                <div ng-show="refClick"-->
+                    <ul style="list-style-type:disc;margin-left:10px">
+                        <li ng-repeat="ref in relatorio.referencia">{{ref}}</li>
+                    </ul>
+                <!--/div-->
+            </div>
+
+        </div>
+
+
+
+    </ion-content>
+</ion-view>

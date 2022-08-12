@@ -1,0 +1,39 @@
+<ion-view>
+    <ion-nav-title>Home</ion-nav-title>
+    <ion-nav-buttons ng-show="false" side="right"></ion-nav-buttons>
+    <ion-nav-back-button ng-show="true"></ion-nav-back-button>
+
+    <ion-content padding="true" class="has-header">
+
+        <ion-list id="home-list3">
+
+            <ion-item class="item-icon-left" on-touch="checkConnection('modelos'); cl1 = 'background-color:#d9d9d9'" on-release="cl1=''" style="{{cl1}}">
+                <i class="icon ion-android-add"></i>Montar Modelo
+            </ion-item>
+
+            <ion-item class="item-icon-left" on-touch="checkConnection('montaPropriedade'); cl2 = 'background-color:#d9d9d9'" on-release="cl2=''" style="{{cl2}}">
+                <i class="icon ion-android-map"></i>Planejar Propriedade</ion-item>
+
+            <ion-item class="item-icon-left" ui-sref="enciclopediaIndex" on-touch="checkConnection('enciclopediaIndex'); cl3 = 'background-color:#d9d9d9'" on-release="cl3=''" style="{{cl3}}">
+                <i class="icon ion-ios-book"></i>Enciclopédia
+            </ion-item>
+
+            <ion-item class="item-icon-left" ui-sref="suaConta" on-touch="checkConnection('suaConta'); cl4 = 'background-color:#d9d9d9'" on-release="    cl4=''" style="{{cl4}}">
+                <i class="icon ion-key"></i>Sua Conta
+            </ion-item>
+
+            <ion-item class="item-icon-left" ui-sref="faleConosco" on-touch="cl5 = 'background-color:#d9d9d9'" on-release="cl5=''" style="{{cl5}}">
+                <i class="icon ion-email"></i>Fale Conosco
+            </ion-item>
+
+            <ion-item class="item-icon-left" ui-sref="youTube" on-touch="cl7 = 'background-color:#d9d9d9'" on-release="cl7=''" style="{{cl7}}">
+                <i class="icon ion-social-youtube"></i>Vídeos e tutoriais
+            </ion-item>
+
+            <ion-item class="item-icon-left" on-touch="logout(); cl6='background-color:#d9d9d9'" on-release="cl6=''" style="{{cl6}}">
+                <i class="icon ion-log-out"></i>Sair
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

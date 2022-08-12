@@ -1,0 +1,34 @@
+﻿<ion-view>
+    <ion-nav-title>Onde plantar</ion-nav-title>
+        
+    <ion-content padding="true" class="has-header">
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-touch="linkHelp(22)" class="helpPhrase">Escolha onde irá plantar:</p>
+        </div>
+
+        <form class="list zonaWrapper">
+
+            <div ng-repeat="i in areas">
+
+                <div style="display:flex; align-items:center;justify-content:center">
+
+                    <i class="qmark icon ion-help-circled" on-touch="linkHelp(i.help)" style="margin-right:10px"></i>
+
+                    <ion-radio ng-value="i.val" on-touch="wait(i.val)" style="text-align:center;" class="zonaSelector">
+                        {{i.val}}
+                    </ion-radio>
+
+                </div>
+
+                <div class="spacer" style="height:50px"></div>
+
+            </div>
+        </form>
+
+        <div class="spacer" style="height:20px"></div>
+
+        <!--div style="text-align:center;color:red">*Recomendações para APP são válidas apenas para propriedades com até 4 módulos fiscais.</div-->
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,65 @@
+<ion-view>
+    <ion-nav-title>Plano da Propriedade</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="row" style="height:90vh;max-height:90vh;min-height:90vh">
+            <div class="col" style="width:30vw;max-width:30vw">
+
+                <div>
+                    <div class="item item-divider item-text-wrap">Propriedade <span ng-show="areaBoundary">({{areaBoundary}} ha)</span></div>
+                    <label class="item item-select">
+                        <select ng-options="i.OBJECTID as i.nomLocal for i in propriedades track by i.OBJECTID" ng-model="bounds.selProp" ng-change="getBoundary(bounds.selProp)"></select>
+                    </label>
+
+                    <label class="item item-input item-text-wrap">
+                        <a on-tap="linkHelp(2)">CAR:</a> &nbsp;                        
+                            <input type="text" placeholder="número do CAR" ng-model="bounds.selCAR">
+
+                            <button class="button button-small button-positive" style="margin-right:10px" on-tap="getBoundary(bounds.selCAR, true)"><i class="icon ion-search"></i></button>        
+                    </label>
+                </div>
+
+                <div style="margin-top:10px">
+                    <div style="text-align:center">Modelos SAF</div>
+                    
+                    <div class="button-bar">
+                        <a class="button button-stable item-text-wrap" on-tap="publicoPrivado()" ng-style="corBotaoAgora()">Privados</a>
+
+                        <a class="button button-stable item-text-wrap" on-tap="publicoPrivado(false)" ng-style="corBotaoAgora(false)">Públicos</a>                        
+                    </div>
+
+                    <ion-scroll zooming="false" direction="y" class="scrollable-list" style="max-height:30vh">
+                        <ul class="list">
+                            <li ng-repeat="m in modelos | filter: filtroPubPriv" style="text-align:left;background-color:{{m.bg}}" class="item item-text-wrap" on-tap="ativaProjeto(m)">
+                                <i class="icon ion-leaf" style="color:{{m.cor}};font-size:24px"></i> &nbsp; Projeto {{m.idRecomendacao}}
+                            </li>
+                        </ul>
+                    </ion-scroll>
+                </div>
+
+                <div>
+                    <div style="text-align:center;font-weight:bold">Projeto em foco</div>
+
+                    <ul ng-hide="!projAtivo">
+                        <li><i class="icon ion-leaf" style="color:{{projAtivo.cor}};font-size:14px"></i> &nbsp; {{projAtivo.especies}}</li>
+
+                        <li><i class="icon ion-leaf" style="color:{{projAtivo.cor}};font-size:14px"></i> &nbsp; Duração: {{projAtivo.horizonte}} {{projAtivo.intervalo}}</li>
+                    </ul>
+
+                    <div ng-show="!projAtivo">Nenhum modelo selecionado</div>
+
+                </div>
+
+                <a class="button button-stable  button-block buttonStyle {{bg}}" on-tap="enviaPropriedade();bg = 'buttonStyleClicked'" on-release="bg=''">Exportar</a>
+
+            </div>
+
+            <div id="leafMap" class='col' style="width:60vw;max-width:60vw;height:inherit"></div>
+
+        </div>
+
+
+    </ion-content>
+</ion-view>

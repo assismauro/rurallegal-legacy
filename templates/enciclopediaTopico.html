@@ -1,0 +1,19 @@
+﻿<ion-view>
+        <ion-nav-title>Ajuda</ion-nav-title>
+
+    <ion-content padding="true" class="has-header">
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <h2>{{info.nomTela}}</h2>
+
+        <h3>{{info.nomItemHelp}}</h3>
+
+        <p style="text-align:justify;border-top:30px;font-size:18px" ng-bind-html="info.desDefinicao"></p>
+
+        <div ng-hide="!info.referencia" style="margin-top:20px">
+            <div><b>Fonte:</b></div>
+            <div style="margin-top:10px" ng-bind-html="info.referencia"></div>
+        </div>
+
+    </ion-content>
+</ion-view>

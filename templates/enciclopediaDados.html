@@ -1,0 +1,53 @@
+﻿<ion-view>
+    <ion-nav-title>{{titulo}}</ion-nav-title>
+        
+
+    <ion-content padding="true" class="has-header">
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="button-bar">
+            <button class="button button-assertive" on-tap="exportaTabela('pdf')">PDF</button>
+
+            <button class="button button-balanced" on-tap="exportaTabela('xlsx')">Excel</button>
+        </div>
+
+        <div class="list list-inset" style="margin-bottom:0px">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                
+                    <input id="buscaEnciclopedia" type="text" placeholder="Busca por {{search}}" list="searchList" ng-model="searchBox.sValue">
+                    <datalist id="searchList">
+                        <option ng-repeat="i in datalist" value="{{i}}">
+                    </datalist>
+
+                    <button class="button button-small button-positive" style="margin-right:10px" on-tap="searchValue(searchBox.sValue)"><i class="icon ion-search"></i></button>
+
+                    <button class="button button-small button-assertive" style="margin-right:10px" on-tap="limpaFiltro()"><i class="icon ion-ios-trash"></i></button>
+
+            </label>
+        </div>
+
+        <div class="button-bar" style="margin-top:0px">
+            <a class="button button-clear button-positive" ng-repeat="pag in ['<<','<','>','>>']" on-tap="pagination(pag)" style="font-weight:900;font-size:20px">{{pag}}</a>
+        </div>
+
+        <ion-scroll class="showBars" zooming="false" direction="x" style="max-width:90%;text-align:center;">
+            <table style="margin-top:12px">
+                <tr>
+                    <th class="headerEnciclopedia tabelaEnciclopedia" ng-repeat="h in header" on-tap="setSortCol($index)">{{h}}</th>
+                </tr>
+
+                <tr ng-repeat="row in dados">
+                    <td class="tabelaEnciclopedia" ng-repeat="col in colNames" ng-hide="hideCol(col)">
+                        <a ng-show="showLink(row[col], col)" on-tap="openLink(row)" ng-bind-html="row[col]"></a>
+                        <span ng-hide="showLink(row[col], col)" ng-bind-html="row[col]"></span>
+                    </td>
+                </tr>
+            </table>
+        </ion-scroll>
+
+        <!--button class="button button-stable button-block">PDF</button-->
+
+
+    </ion-content>
+</ion-view>

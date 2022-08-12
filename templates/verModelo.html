@@ -1,0 +1,27 @@
+﻿<ion-view>
+        <ion-nav-title>Ver Modelo</ion-nav-title>
+        <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p class="helpPhrase" on-touch="linkHelp(41)">Modelo espacial:</p>
+        </div>
+
+        <ion-scroll delegate-handle="frame" zooming="true" direction="xy" style="width: 100%; height: 65%">
+            <table>
+                <tr ng-repeat="j in dim">
+                    <td ng-repeat="i in dim" class="gridCell" ng-style="grid[i+'_'+j].style">
+                        {{grid[i+'_'+j].char}} </td>
+                </tr>
+            </table>
+        </ion-scroll>
+
+        <div ng-repeat="leg in legenda">
+            <span style="color:{{leg.cor}};text-decoration:{{leg.ind}}">{{leg.cod}}</span>:&ensp;{{leg.n1}} - <span style="font-style:italic">{{leg.n2}}</span>
+        </div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="finishProject(); bg = 'buttonStyleClicked'" on-release="bg=''">Finalizar</a>
+
+    </ion-content>
+</ion-view>

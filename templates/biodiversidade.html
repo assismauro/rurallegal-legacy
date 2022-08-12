@@ -1,0 +1,82 @@
+﻿<ion-view>
+    <ion-nav-title>Biodiversidade</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p class="helpPhrase" on-tap="linkHelp(36)">Escolha as espécies para biodiversidade:</p>
+        </div>
+
+        <!--(3,4,5,6)-->
+        <div ng-repeat="carac in caracteristicasInteresse">
+            <div on-tap="dropMenusBio[carac.idCaracteristica] = !dropMenusBio[carac.idCaracteristica]; dropMenusBio.dropped[carac.idCaracteristica] = 'toggleTitleActive'" class="item toggleTitle toggleTitleBio {{dropMenusBio.dropped[carac.idCaracteristica]}}" on-release="dropMenusBio.dropped[carac.idCaracteristica] = ''">
+
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="dropMenusBio[carac.idCaracteristica]"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="dropMenusBio[carac.idCaracteristica]"></i>
+                <a on-tap="linkHelp(carac.idCaracteristica)" class="bioGrupos">{{carac.nomCaracteristica}}</a>
+                <div style="float:right;">
+                    <span style="color:blue">{{contador[carac.idCaracteristica]}}</span>
+                    <span style="color:red">{{contador[carac.idCaracteristica + '_miss']}}</span>
+                    <span style="color:green"><i class="icon ion-checkmark-round" ng-hide="contador[carac.idCaracteristica + '_miss']"></i></span>
+                </div>
+            </div>
+            <div ng-show="dropMenusBio[carac.idCaracteristica]" class="bioDrop">
+                <ion-scroll zooming="false" direction="y" class="scrollable-list">
+
+                    <div ng-repeat="esp in especiesBio | filter: {idCaracteristica: carac.idCaracteristica} : true" style="display:flex;justify-content:center;align-items:center">
+
+                        <i class="qmark icon ion-help-circled" on-tap="linkEspecie(esp.idEspecie)" style="margin-right:10px"></i>
+
+                        <ion-checkbox ng-model="esp.opt" class="toggleItemBio" ng-disabled="esp.fix" ng-click="getOptId(esp)">{{esp.nomComum}}<br />(<span style="font-style:italic">{{esp.nomCientifico}}</span>)</ion-checkbox>
+
+                    </div>
+
+                </ion-scroll>
+            </div>
+        </div>
+
+        <div on-tap="dropMenusBio['outras'] = !dropMenusBio['outras']; dropMenusBio.dropped['outras'] = 'toggleTitleActive'" class="item toggleTitle toggleTitleBio {{dropMenusBio.dropped['outras']}}" on-release="dropMenusBio.dropped['outras'] = ''">
+
+            <i class="icon ion-arrow-down-b dropLeft" ng-show="dropMenusBio['outras']"></i>
+            <i class="icon ion-arrow-right-b dropLeft" ng-hide="dropMenusBio['outras']"></i> Outras
+            <div style="float:right;">
+                <span style="color:blue">{{contador['outras']}}</span>
+                <span style="color:red">{{contador['outras_miss']}}</span>
+                <span style="color:green"><i class="icon ion-checkmark-round" ng-hide="contador['outras_miss']"></i></span>
+            </div>
+        </div>
+        <div ng-show="dropMenusBio['outras']" class="bioDrop">
+            <ion-scroll zooming="false" direction="y" class="scrollable-list">
+
+                <div ng-repeat="esp in especiesBio | filter: {outras: true} : true" style="display:flex;justify-content:center;align-items:center">
+
+                    <i class="qmark icon ion-help-circled" on-tap="linkEspecie(esp.idEspecie)" style="margin-right:10px"></i>
+
+                    <ion-checkbox ng-model="esp.opt" class="toggleItemBio" ng-disabled="esp.fix" ng-click="contaEspecies()">{{esp.nomComum}}<br />(<span style="font-style:italic">{{esp.nomCientifico}}</span>)</ion-checkbox>
+
+                </div>
+            </ion-scroll>
+        </div>
+
+        <div class="spacer" style="height: 20px;"></div>
+
+        <div class="item toggleTotalBio">
+            <span>Total</span>
+            <div style="float:right;">
+                <span style="color:blue">{{contador.total}}</span>
+                <span style="color:red">{{contador.total_miss}}</span>
+                <span style="color:green"><i class="icon ion-checkmark-round" ng-hide="contador.total_miss"></i></span>
+            </div>
+        </div>
+
+        <div class="spacer" style="height: 20px;"></div>
+
+        <div class="listSpecies">
+            <strong>Selecionadas: </strong> {{listaEspecies}}
+        </div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="checkBio(); bg = 'buttonStyleClicked'" on-release="bg=''">OK</a>
+
+    </ion-content>
+</ion-view>

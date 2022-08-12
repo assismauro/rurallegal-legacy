@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <meta http-equiv="Content-Security-Policy" content="img-src 'self' data: *; default-src * 'self' gap: wss: ws: ; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+
+    <title></title>
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <script src="lib/chart.js/dist/Chart.min.js"></script>
+    <script src="lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <style type="text/css">
+        .platform-ios .manual-ios-statusbar-padding {
+            padding-top: 20px;
+        }
+        
+        .manual-remove-top-padding {
+            padding-top: 0px;
+        }
+        
+        .manual-remove-top-padding .scroll {
+            padding-top: 0px !important;
+        }
+        
+        ion-list.manual-list-fullwidth div.list,
+        .list.card.manual-card-fullwidth {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+        
+        ion-list.manual-list-fullwidth div.list>.item,
+        .list.card.manual-card-fullwidth>.item {
+            border-radius: 0px;
+            border-left: 0px;
+            border-right: 0px;
+        }
+        
+        .show-list-numbers-and-dots ul {
+            list-style-type: disc;
+            padding-left: 40px;
+        }
+        
+        .show-list-numbers-and-dots ol {
+            list-style-type: decimal;
+            padding-left: 40px;
+        }
+    </style>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <!--script src="http://maps.google.com/maps/api/js?key=AIzaSyBWfPYEXflW0_u62QrwJIDNJMXtkHk_zZ4"></script-->
+
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyB1tj_afMtRGodcMByrDoQpE0nf3KCCSs4"></script>
+
+    <!-- Only required for Tab projects w/ pages in multiple tabs 
+    <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+    -->
+
+    <script src="lib/angular-filter/dist/angular-filter.min.js"></script>
+
+    <link rel="stylesheet" href="lib/leaflet/dist/leaflet.css" />
+
+    <script src="lib/leaflet/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="lib/leaflet-draw/dist/leaflet.draw.css" />
+
+    <script src="lib/leaflet-draw/dist/leaflet.draw.js"></script>
+
+    <script src="lib/turf/turf.min.js"></script>
+
+
+</head>
+
+<body ng-app="app" animation="slide-left-right-ios7" class="platform-android">
+    <div style="">
+        <div style="">
+
+            <ion-nav-bar align-title="center" class="bar-stable">
+                <ion-nav-back-button></ion-nav-back-button>
+                <ion-nav-buttons side="right">
+                    <button class="button button-stable" on-tap="promptDicas(dicaIndex)"><i class="icon ion-ios-gear"></i></button>                    
+
+                    <button class="button button-stable" ui-sref="home"><i class="icon ion-home"></i></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+
+            <ion-nav-view></ion-nav-view>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

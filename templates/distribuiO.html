@@ -1,0 +1,41 @@
+﻿<ion-view>
+    <ion-nav-title>Distribuição</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p class="helpPhrase" on-touch="linkHelp(26)">Como distribuir o plantio:</p>
+        </div>
+
+        <div class="spacer" style="height: 20px;"></div>
+
+        <div class="overFrame"><a on-touch="linkHelp(27)">Faixas</a></div>
+        <div class="spacer" style="height: 10px;"></div>
+        <div class="distribute" on-touch="wait('Faixas')" ng-style="styles.Faixas">
+            <img src="img/faixas.PNG" class="plantio">
+        </div>
+
+
+        <div class="spacer" style="height: 20px;"></div>
+
+
+        <div class="overFrame"><a on-touch="linkHelp(28)">Moldura</a></div>
+        <div class="spacer" style="height: 10px;"></div>
+        <div class="distribute" on-touch="wait('Moldura')" ng-style="styles.Moldura">
+            <img src="img/nucleo.PNG" class="plantio">
+        </div>
+
+        <!--div class="overFrame">Aleat&oacuterio</div>
+    <div class="distribute" on-touch="wait('Aleat\u00f3rio')" ng-style="styles['Aleat\u00f3rio']">
+        <img src="img/aleatorio.PNG" class="plantio">        
+    </div>
+
+      <div class="overFrame">Pomar</!--div>
+    <div class="distribute" on-touch="wait('Pomar')" ng-style="styles.Pomar">
+        <img src="img/pomar.PNG" class="plantio">
+    </div-->
+
+    </ion-content>
+</ion-view>

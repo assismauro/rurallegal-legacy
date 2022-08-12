@@ -1,0 +1,32 @@
+<ion-view>
+    <ion-nav-title>Exportar mapa</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(80)" class="helpPhrase">Compartilhe e faça o download do seu mapa:</p>
+        </div>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" on-touch="downPNG()"><span style="color:#ffcc00">PNG</span></button>
+
+        <button class="botaoCompartilha button button-energized button-block" on-tap="share()"><i class="icon ion-android-share-alt"></i></button>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-dark button-block" on-tap="emailPNG()"><i class="icon ion-ios-email"></i>&nbsp &nbsp Receber via email</button>
+
+        <div class="spacer" style="height: 30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" ui-sref="home"><i class="icon ion-home"></i></button>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <div style="text-align:center">
+            <img src="{{picture}}" alt="mapa" style="max-width:80vw;">
+        </div>
+
+    </ion-content>
+</ion-view>

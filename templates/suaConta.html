@@ -1,0 +1,66 @@
+﻿<ion-view>
+    <ion-nav-title>Sua Conta</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label labelDadosUser">Usu&aacuterio</span>
+                <p class="dadosUser">{{usuario.nomUsuario}}</p>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label labelDadosUser">Nome Completo</span>
+                <p class="dadosUser">{{usuario.nomCompleto}}</p>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label labelDadosUser">Email</span>
+                <p class="dadosUser" ng-hide="edita">{{usuario.email}}</p>
+                <input type="email" ng-show="edita" class="editaUser inputBox" ng-model="alteraUsuario.email">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label labelDadosUser">CAR</span>
+                <p class="dadosUser" ng-hide="edita">{{usuario.idCARDefault}}</p>
+                <input type="text" ng-show="edita" class="editaUser inputBox" ng-model="alteraUsuario.idCARDefault" placeholder="número do CAR">
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label labelDadosUser">Munic&iacutepio</span>
+                <p class="dadosUser" ng-hide="edita">{{usuario.nomMunicipio}}</p>
+                <input class="editaUser inputBox" type="text" ng-show="edita" ng-model="alteraUsuario.nomMunicipio" placeholder="nome do município">
+            </label>
+
+            <label class="item item-input item-stacked-label" ng-hide="edita">
+                <span class="input-label labelDadosUser">Estado</span>
+                <p class="dadosUser">{{usuario.siglaEstado}}</p>
+            </label>
+            <label class="item item-select item-stacked-label" ng-show="edita">
+                <span class="input-label labelDadosUser">Estado</span>
+                <select class="editaUser" ng-show="edita" ng-options="est.idEstado as est.siglaEstado for est in estados" ng-model="alteraUsuario.idEstado"></select>
+            </label>
+
+            <div ng-show="edita">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label labelDadosUser">Nova senha</span>
+                    <input class="inputBox editaUser" type="password" placeholder="senha" ng-model="alteraUsuario.s1">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label labelDadosUser">Confirme a nova senha</span>
+                    <input class="inputBox editaUser" type="password" placeholder="senha" ng-model="alteraUsuario.s2">
+                </label>
+            </div>
+
+            <div class="button-bar">
+                <a class="button button-stable button-block blockStyle {{b1}}" on-touch="edicao(true)">Alterar</a>
+                <a class="button button-stable button-block blockStyle  {{b2}}" on-touch="edicao(false);b2 = 'buttonStyleClicked'" on-release="b2=''">Cancelar</a>
+                <button class="button button-stable button-block blockStyle  {{b3}}" on-touch="b3Style(true)" on-release="b3Style(false)">Enviar</button>
+            </div>
+
+
+        </div>
+
+    </ion-content>
+</ion-view>

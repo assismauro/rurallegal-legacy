@@ -1,0 +1,124 @@
+﻿<ion-view>
+    <ion-nav-title>Modelos</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(12)" class="helpPhrase">Crie um novo modelo:</p>
+        </div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="startProject(); bg = 'buttonStyleClicked'" on-release="bg=''">
+            <span class="modeloButtonText">+ Floresta</span>
+            <img src="img/tree-silhouette.png" class="modeloButtonImage" />
+        </a>
+        <!--div style="width:100%;text-align:center;font-size:18px;">
+            <input style="width:20px;height:20px;" type="checkbox" ng-model="dicas.flo" /> Mostrar dicas <span style="font-style:italic">+ Floresta</span>
+        </div-->
+
+        <div class="spacer" style="height: 10px;"></div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg2}}" on-touch="startSAF(); bg2 = 'buttonStyleClicked'" on-release="    bg2 = ''">
+            <span class="modeloButtonText">+ SAF</span>
+            <img src="img/plant-on-a-hand.png" class="modeloButtonImage" />
+        </a>
+        <!--div style="width:100%;text-align:center;font-size:18px;">
+            <input style="width:20px;height:20px;" type="checkbox" ng-model="dicas.saf" /> Mostrar dicas <span style="font-style:italic">+ SAF</span>
+        </div-->
+
+        <!--div class="spacer" style="height: 10px;"></div>
+
+        <a class="button button-stable  button-block buttonStyle {{bg3}}" on-tap="startMontaPropriedade(); bg3 = 'buttonStyleClicked'" on-release="bg3 = ''">
+            <span class="modeloButtonText">Monta propriedade SAF</span>
+        </a-->
+
+        <div class="spacer" style="height: 20px;"></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p class="helpPhrase" on-tap="linkHelp(69)">Consulte um modelo existente:</p>
+        </div>
+        <div>
+
+
+            <div on-tap="modelosFloresta = !modelosFloresta; menuF = 'toggleTitleActive'; loadProjects()" class="item toggleTitleModelos {{menuF}}" on-release="menuF=''">
+
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="modelosFloresta"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="modelosFloresta"></i>
+                <span class="modeloButtonText">Floresta</span>
+
+                <img src="img/tree-silhouette.png" class="modeloButtonImage" />
+
+            </div>
+            <div ng-show="modelosFloresta" ng-repeat="i in modelosProjeto">
+
+
+                <div class="item toggleItem {{itemClass[i.area]}} {{i.class}}" on-tap="activateItem(i.area)" on-release="activateItem(i.area,true)">
+                    <i class="qmark icon ion-help-circled" on-touch="linkHelp(i.help)" style="margin-right:10px"></i>
+                    <span ng-hide="i.files.length == 0">
+                        <i class="icon ion-arrow-down-b dropLeft" ng-show="projDownButtons[i.area]"></i>
+                        <i class="icon ion-arrow-right-b dropLeft" ng-hide="projDownButtons[i.area]"></i>
+                    </span> {{i.area}}
+                </div>
+
+
+                <div class="item toggleItem item-text-wrap" ng-repeat="p in i.files" ng-show="projDownButtons[i.area]" style="background-color:rgb(235, 250, 244);border-radius:25px">
+                    <i class="icon ion-trash-a" style="color:darkslategrey;font-size:20px;margin-right:8px" on-tap="confirmaDeleta(p.proj)"></i> Projeto {{p.proj}}:
+                    <div> {{p.dat}} - {{p.desc}}</div>
+
+                    <div class="button-bar">
+                        <a class="button button-stable button-block" on-tap="openProject(p.name+'.pdf')" style="color:red">PDF</a>
+                        <a class="button button-stable button-block" on-tap="openProject(p.name+'.xlsx')" style="color:darkgreen">Excel</a>
+                    </div>
+
+                    <div class="button-bar">
+                        <a class="button button-assertive button-block" on-tap="shareProject(p.name+'.pdf')"><i class="icon ion-android-share-alt"></i></a>
+                        <a class="button button-balanced button-block" on-tap="shareProject(p.name+'.xlsx')"><i class="icon ion-android-share-alt"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="spacer" style="height: 30px;"></div>
+
+
+
+            <div on-tap="modelosSAF = !modelosSAF; menuS='toggleTitleActive'; loadSAFs()" class="item toggleTitleModelos {{menuS}}" on-release="menuS=''">
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="modelosSAF"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="modelosSAF"></i>
+                <span class="modeloButtonText">SAF</span>
+
+                <img src="img/plant-on-a-hand.png" class="modeloButtonImage" />
+
+            </div>
+
+            <div ng-show="modelosSAF" ng-repeat="j in modelosProjetoSAF">
+                
+                <div class="item toggleItem {{itemClass[j.tipo]}} {{j.class}}" on-tap="activateItem(j.tipo)" on-release="activateItem(j.tipo,true)">
+                    <i class="qmark icon ion-help-circled" on-touch="linkHelp(j.help)" style="margin-right:10px"></i>
+                    <span ng-hide="j.files.length === 0">
+                        <i class="icon ion-arrow-down-b dropLeft" ng-show="projDownButtons[j.tipo]"></i>
+                        <i class="icon ion-arrow-right-b dropLeft" ng-hide="projDownButtons[j.tipo]"></i>
+                    </span> {{j.tipo}}
+                </div>
+                
+                <div ng-show="projDownButtons[j.tipo]" class="item toggleItem item-text-wrap" ng-repeat="saf in j.files" style="background-color:rgb(235, 250, 244);border-radius:25px">
+                    <i ng-show="podeDeletarSaf(saf.idUsuario)" class="icon ion-trash-a" style="color:darkslategrey;font-size:20px;margin-right:8px" on-tap="confirmaDeleta(saf.idRecomendacao, false)"></i> Projeto {{saf.idRecomendacao}}:
+                    <br> <span ng-show="j.tipo !== 'Privado'">Usuário: {{saf.nomUsuario}},</span> {{formataData(saf.data)}}<br> HP: {{saf.horizonte}} {{saf.intervalo}}
+                    <br> {{saf.especies}}
+
+                    <div class="button-bar">
+                        <a class="button button-stable button-block" on-tap="openProject(saf.idRecomendacao+'.xlsx', false)" style="color:darkgreen">Excel</a>
+                        <a class="button button-balanced button-block" on-tap="shareProject(saf.idRecomendacao+'.xlsx', false)"><i class="icon ion-android-share-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spacer" style="height: 30px;"></div>
+
+        </div>
+
+
+    </ion-content>
+</ion-view>

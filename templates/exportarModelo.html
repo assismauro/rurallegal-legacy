@@ -1,0 +1,32 @@
+﻿<ion-view>
+    <ion-nav-title>Exportar Modelo</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p class="helpPhrase" on-tap="linkHelp(42)">Escolha como salvar ou compartilhar o modelo:</p>
+        </div>
+
+        <div id="exportarModelo-container13" class="creator-container"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" on-tap="downPDF()"><span style="color:red">PDF</span></button>
+
+        <button class="botaoCompartilha button button-assertive button-block" on-tap="share(0)"><i class="icon ion-android-share-alt"></i></button>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" on-tap="downXLS()"><span style="color:darkgreen">Excel</span></button>
+
+        <button class="botaoCompartilha button button-balanced button-block" on-tap="share(1)"><i class="icon ion-android-share-alt"></i></button>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-dark button-block" on-tap="toMyEamil()"><i class="icon ion-ios-email"></i>&nbsp &nbsp Receber via email</button>
+
+        <div class="spacer" style="height: 30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" ui-sref="home"><i class="icon ion-home"></i></button>
+
+    </ion-content>
+</ion-view>

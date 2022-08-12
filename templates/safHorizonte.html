@@ -1,0 +1,25 @@
+﻿<ion-view>
+    <ion-nav-title>Horizonte</ion-nav-title>
+        
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(43)" class="helpPhrase">Escolha a periodicidade de intervenções e o Horizonte de Planejamento (HP):</p>
+        </div>
+
+        <label class="item item-select localidade">
+            <span class="input-label">Intervalo</span>
+            <select ng-model="planoTempo.intervalo" ng-options="i as i.nom for i in intervalosTempo"></select>
+        </label>
+
+        <label class="item item-input localidade">
+            <span class="input-label">Horizonte</span>
+            <input style="text-align:right" type="number" ng-model="planoTempo.horizonte" placeholder="tempo" />
+        </label>
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="setTimes(); bg = 'buttonStyleClicked'" on-release="bg=''">OK</a>
+
+    </ion-content>
+</ion-view>

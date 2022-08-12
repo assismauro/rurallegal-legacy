@@ -1,0 +1,13 @@
+﻿<ion-view>
+        <ion-nav-title>Enciclopédia</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+        <ion-list>
+
+            <ion-item class="item-icon-left" ng-repeat="cat in categorias" on-touch="processaCategoria(cat.self)" style="{{cat.style}}" on-release="processaCategoria(cat.self,false)">
+                <i class="icon ion-{{cat.icon}}"></i>{{cat.titulo}}
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

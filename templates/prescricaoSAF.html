@@ -1,0 +1,127 @@
+<ion-view>
+        <ion-nav-title>Seleção de atividades</ion-nav-title>
+        <ion-content padding="false" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="row" style="height:90vh;max-height:90vh;min-height:90vh">
+
+            <div class="col" style="width:30vw;max-width:30vw" ng-hide="onlyCalendario">
+
+                <div>
+                    <div style="text-align:center;font-weight:bold;margin-bottom:10px">Espécies</div>
+
+                    <ion-scroll zooming="false" direction="y" class="scrollable-list" style="max-height:70vh">
+                        <ul class="list">
+                            <li ng-repeat="esp in SAF.especies | orderBy: esp.nomComum" style="text-align:left;background-color:white;" class="item item-text-wrap">
+                                
+                                <i class="icon ion-leaf" style="color:{{esp.cor}};font-size:24px" ng-show="esp.hashFigura.length < 100"></i> 
+                                
+                                <img ng-src="{{esp.hashFigura}}" alt="" style="max-height:28px;" ng-hide="esp.hashFigura.length < 100" />
+
+                                &nbsp; 
+                                <span style="color:{{esp.cor}}">{{esp.nomComum}}</span>
+                                <br>
+                                <span style="font-size:12px">
+                                    <span ng-bind-html="getLatin(esp.nomCientifico)"></span>
+                                    <br>
+                                    {{SAF.tempo.intervalo.view}}(s) de plantio: 
+                                    {{esp.periodos.join(', ')}}
+                                    <br>
+                                    Ciclo: {{esp.CicloMaximo * 12 / SAF.tempo.intervalo.n}} {{SAF.tempo.intervalo.nom}}
+                                </span>
+                            </li>
+                        </ul>
+                    </ion-scroll>
+                </div>
+
+                <a class="button button-stable  button-block buttonStyle {{bg}}" on-tap="bg = 'buttonStyleClicked';fechaAtividades()" on-release="bg=''">OK</a>
+            </div>
+
+            <div style="border: 1px solid black;height:inherit;"></div>
+
+            <div class="col" style="width:{{widthLeft}};max-width:{{widthLeft}}">
+
+                <div style="width:inherit;text-align:center">
+                    <i class="icon ion-trash-a" style="font-size:30px;color:darkslategrey" on-tap="limpaCronograma()"></i> Cronograma &nbsp;
+                    <span on-touch="expandeCronograma()">
+                        <i ng-hide="onlyCalendario" class="icon ion-arrow-expand" style="font-size:30px"></i>
+                        <i ng-show="onlyCalendario" class="icon ion-arrow-shrink" style="font-size:30px"></i>
+                    </span> &nbsp;
+                </div>
+
+                    <ion-scroll delegate-handle="handlePresc" zooming="true" direction="xy" style="max-height:80vh;width:100%">
+
+                        <table>
+                            <tr>
+                                <td class="colPrimColuna prescColumn">{{SAF.tempo.intervalo.view}}</td>
+                                <td class="colCalendario" ng-repeat="i in SAF.horizonte" on-tap="selecionaPeriodo(i)" style="background-color:{{periodoCor(i)}}">
+                                    {{i}}
+                                </td>
+                            </tr>
+
+                            <tr style="border-bottom: 1px solid #ddd" ng-repeat="presc in indexPresc | orderBy: ordenaAtividades" ng-show="filtraAtividades(presc)">
+
+                                <td class="colPrimColuna prescColumn" on-tap="clickPresc(presc)">
+                                    <span ng-bind-html="prescDistinct[presc].title"></span>
+                                    &nbsp;
+                                    <i ng-show="prescDistinct[presc].temRegistro" class="icon ion-checkmark-round" style="font-size:18px;color:green"></i>
+                                </td>
+
+                                <td class="colCalendario" ng-repeat="i in SAF.horizonte">
+                                    <i on-tap="selecionaAtividade(presc,i)" class="icon ion-record" style="font-size:30px;color:{{highlightAtividade(presc,i)}}"
+                                        ng-show="mostraAtividade(presc,i)"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </ion-scroll>
+
+                <ion-scroll delegate-handle="opcoesAtividade" zooming="false" direction="y" style="max-height:65vh;width:100%" ng-hide="selectPresc == -1 || !prescDistinct[selectPresc].periodos[periodoAgora]">
+                    
+                    <div ng-repeat="d in detPresc" ng-switch="d.dropDown" ng-hide="mostraEqIn(d.coluna)">
+
+                        <label class="item item-select item-text-wrap" ng-switch-when="true">
+                            <span class="input-label">{{d.tipo}}</span>
+                            <select ng-model="prescDistinct[selectPresc].material[periodoAgora][d.coluna]" ng-options="i[d.coluna] as i[d.nomeCol] for i in prescricoes | filter: listaEqIn(d) | unique: d.coluna" ng-change="waitAutoPreenche()">
+                            </select>
+                        </label>
+
+                        <label class="item item-input item-text-wrap" ng-switch-default>
+                            <span class="input-label">{{d.tipo}}</span>
+                            <input id="fidPresc_{{$index}}" ng-keypress="enterDown($event, $index)" type="number" step="0.01" min="0" ng-model="prescDistinct[selectPresc].material[periodoAgora][d.coluna]" style="text-align:right" ng-change="waitAutoPreenche()" />
+                        </label>                        
+                    </div>      
+                    
+                    <div ng-show="prescDistinct[selectPresc].colheita">
+                            
+                        <div class="item item-divider">
+                            Valor da produção
+                        </div>
+                            
+                        <label class="item item-select item-text-wrap">
+                            <span class="input-label">Tipo de produto</span>
+                            <select ng-model="prescDistinct[selectPresc].material[periodoAgora].idProduto" ng-options="prod.idProduto as prod.nomProduto for prod in prescricoes | filter:{ idEspecie: prescDistinct[selectPresc].idEspecie, idProduto: '!!' }" ng-change="waitAutoPreenche()" ></select>
+                        </label>
+                                    
+                        <label class="item item-input item-text-wrap">
+                            <span class="input-label">Unidade</span>
+                            <input ng-keypress="enterDown($event, 0, '#fidColt_')" id="fidColt_0" style="text-align:right" type="text" ng-model="prescDistinct[selectPresc].material[periodoAgora].unidade" ng-change="waitAutoPreenche()" />
+                        </label>
+                                    
+                        <label class="item item-input item-text-wrap">
+                            <span class="input-label">Produtividade (unidades/planta)</span>
+                            <input ng-keypress="enterDown($event, 1, '#fidColt_')" id="fidColt_1" style="text-align:right" type="number" step="0.01" min="0"  ng-model="prescDistinct[selectPresc].material[periodoAgora].produtividade" placeholder="{{prescDistinct[selectPresc].material[periodoAgora].unidade}}/planta" ng-change="waitAutoPreenche()"/>
+                        </label>
+                                    
+                        <label class="item item-input item-text-wrap">
+                            <span class="input-label">Preço por unidade (R$)</span>
+                            <input ng-keypress="enterDown($event, 2, '#fidColt_')" id="fidColt_2" style="text-align:right" type="number" step="0.01" min="0" ng-model="prescDistinct[selectPresc].material[periodoAgora].preco" ng-change="waitAutoPreenche()"/>
+                        </label>
+                    </div>
+
+                </ion-scroll>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

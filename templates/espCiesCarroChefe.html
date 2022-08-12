@@ -1,0 +1,74 @@
+﻿<ion-view>
+        <ion-nav-title>Espécies carro-chefe</ion-nav-title>
+    <ion-content padding="true" class="has-header">
+
+        <div ng-hide="chartOnly">
+
+            <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+            <div style="text-align:center;" class="show-list-numbers-and-dots">
+                <p class="helpPhrase" on-touch="linkHelp(30)">Escolha as espécies carro-chefe:</p>
+            </div>
+
+            <div on-touch="nm = !nm; drop1 = 'toggleTitleActive'" class="item toggleTitle {{drop1}} {{showGrupo.nmad}}" on-release="drop1 = ''">
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="nm && showGrupo.nmad == ''"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="nm || showGrupo.nmad == 'CCvazio'"></i>
+                <a on-touch="linkHelp(32)">Apenas não madeireiras</a>
+            </div>
+            <div ng-show="nm && showGrupo.nmad == ''" class="CCDrop">
+                <ion-scroll zooming="false" direction="y" class="scrollable-list">
+
+                    <ion-radio ng-repeat="i in combCC | filter: {props: {categoria: 'nmad'} } : true" class="toggleItemCC item-text-wrap" on-tap="processCC(i)">
+                        {{i.i.join(', ')}}
+                        <br /><span style="color:green">R$ {{i.props.receita}} /ha/28 anos</span>
+                    </ion-radio>
+
+                </ion-scroll>
+            </div>
+
+            <div class="spacer" style="height: 20px;"></div>
+
+            <div on-touch="am = !am; drop2 = 'toggleTitleActive'" class="item toggleTitle {{drop2}} {{showGrupo.mad}}" on-release="drop2=''">
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="am && showGrupo.mad == ''"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="am || showGrupo.mad == 'CCvazio'"></i>
+                <a on-touch="linkHelp(33)">Apenas madeireiras</a>
+            </div>
+            <div ng-show="am && showGrupo.mad == ''" class="CCDrop">
+                <ion-scroll zooming="false" direction="y" class="scrollable-list">
+
+                    <ion-radio ng-repeat="i in combCC | filter: {props: {categoria: 'mad'} } : true" class="toggleItemCC item-text-wrap" on-tap="processCC(i)">
+                        {{i.i.join(', ')}}
+                        <br /><span style="color:green">R$ {{i.props.receita}} /ha/28 anos</span>
+                    </ion-radio>
+
+                </ion-scroll>
+            </div>
+
+            <div class="spacer" style="height: 20px;"></div>
+
+            <div on-touch="anm = !anm; drop3 = 'toggleTitleActive'" class="item toggleTitle {{drop3}} {{showGrupo.mn}}" on-release="drop3=''">
+                <i class="icon ion-arrow-down-b dropLeft" ng-show="anm  && showGrupo.mn == ''"></i>
+                <i class="icon ion-arrow-right-b dropLeft" ng-hide="anm || showGrupo.mn == 'CCvazio'"></i> Madeireiras e não madeireiras
+            </div>
+            <div ng-show="anm && showGrupo.mn == ''" class="CCDrop">
+                <ion-scroll zooming="false" direction="y" class="scrollable-list">
+
+                    <ion-radio ng-repeat="i in combCC | filter: {props: {categoria: 'mn'} } : true" class="toggleItemCC item-text-wrap" on-tap="processCC(i)">
+                        {{i.i.join(', ')}}
+                        <br /><span style="color:green">VPL: R${{i.props.receita}}/ha/28 anos</span>
+                    </ion-radio>
+
+                </ion-scroll>
+            </div>
+
+            <div class="spacer" style="height: 20px;"></div>
+        </div>
+
+        <!--ion-scroll zooming="true" direction="xy" style="width: 100%;height:{{chartHeight}}" on-double-tap="screenOrientation()"-->
+        <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colors" ng-hide="!labels" style="width:100%;height:{{chartHeight}}" on-double-tap="screenOrientation()"></canvas>
+        <!--/ion-scroll-->
+
+        <a ng-hide="chartOnly" class="button button-stable  button-block buttonStyle {{bg}}" on-touch="checkCC(); bg='buttonStyleClicked'" on-release="bg=''">OK</a>
+
+    </ion-content>
+</ion-view>

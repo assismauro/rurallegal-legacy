@@ -1,0 +1,58 @@
+<ion-view>
+    <ion-nav-title>Cadastro</ion-nav-title>    
+    <ion-nav-buttons ng-show="false" side="right"></ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+   
+    <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+   
+       <form id="cadastro-form7" class="list">
+
+        <label class="item item-input">
+          <span class="input-label">Usuário<span style="color:red">*</span></span>
+          <input class="inputBox" type="text" ng-model="userData.user">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Senha<span style="color:red">*</span></span>
+          <input class="inputBox" type="password" ng-model="userData.pass1">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Confirme a senha<span style="color:red">*</span></span>
+          <input class="inputBox" type="password" ng-model="userData.pass2">
+        </label>
+
+      <label class="item item-input">
+        <span class="input-label">Nome completo<span style="color:red">*</span></span>
+        <input class="inputBox" type="text" ng-model="userData.name">
+      </label>
+
+      <label class="item item-input">
+        <span class="input-label">E-mail<span style="color:red">*</span></span>
+        <input class="inputBox" type="email" ng-model="userData.email">
+      </label>
+
+        <label class="item item-select selectBar">
+            <span class="input-label">Estado</span>
+            <select class="inputBox" ng-options="est.siglaEstado for est in estados" ng-model="userData.estado"></select>
+        </label>
+
+            <label class="item item-input">
+                <span class="input-label">CAR</span>
+                <input class="inputBox" type="number" ng-model="userData.car">
+            </label>
+            <!--label class="item item-input">
+                <span class="input-label">Lote assentamento</span>
+                <input class="inputBox" type="number" ng-model="userData.lote">
+            </label-->
+            <label class="item item-input">
+                <span class="input-label">Município</span>
+                <input class="inputBox" type="text" ng-model="userData.municipio">
+            </label>
+
+      <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="checkNewUser(userData) ; bg='buttonStyleClicked'" on-release="bg=''">Enviar</a>
+
+    </form>
+
+  </ion-content>
+</ion-view>

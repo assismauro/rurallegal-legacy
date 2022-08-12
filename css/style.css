@@ -1,0 +1,633 @@
+﻿/*global*/
+
+.DIS {
+    color: #d9d9d9 !important;
+}
+
+button.deactivated {
+    background-color: #0a4327 !important;
+    color: #000000 !important;
+}
+
+body {
+    font-family: Roboto, Open Sans;
+}
+
+.buttonStyle {
+    background-color: #127948 !important;
+    border-radius: 10px;
+    color: white !important;
+    height: 80px !important;
+    width: 60% !important;
+    margin-left: 20% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.blockStyle {
+    background-color: #127948 !important;
+    border-radius: 10px;
+    color: white !important;
+}
+
+.buttonStyleClicked {
+    background-color: #0a4327 !important;
+}
+
+.dropMenuClicked {
+    background-color: #b3b3b3 !important;
+}
+
+.inputBox {
+    font-weight: normal !important;
+}
+
+.helpPhrase {
+    color: blue;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.dropLeft {
+    float: left;
+    margin-left: 10px;
+}
+
+.selectedItem:active {
+    background-color: #b3b3b3 !important;
+}
+
+.qmark {
+    float: left;
+    font-size: 30px;
+    color: #4242ea;
+}
+
+.qmarkActive {
+    color: red;
+    background-color: #ffd9b3;
+}
+
+.backGround {
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    z-index: 5;
+    background: #bfbfbf;
+    opacity: 0.5;
+}
+
+.spinner {
+    position: fixed;
+    color: black;
+    font-size: 60px;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-name: spin;
+    animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.popup-body {
+    text-align: center;
+}
+
+.scrollable-list {
+    height: inherit;
+    max-height: 200px;
+    width: 100%;
+}
+
+
+/*login page*/
+
+.logoImg {
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.helpLink {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.loginFail {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    color: red;
+    left: 0px;
+}
+
+
+/*cadastro*/
+
+.selectBar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.addCadastro {
+    font-size: 18px;
+    color: blue;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*home*/
+
+
+/*sua conta*/
+
+.dadosUser {
+    font-size: 20px !important;
+    margin-top: 10px;
+    color: #127948 !important;
+}
+
+.editaUser {
+    font-size: 20px !important;
+    margin-top: 10px;
+    color: red !important;
+}
+
+.labelDadosUser {
+    color: #534d4d !important;
+    font-size: 14px !important;
+}
+
+
+/*fale conosco*/
+
+.textoContato {
+    font-size: 24px;
+    text-align: center;
+}
+
+
+/*modelos*/
+
+.toggleTitle {
+    color: black;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    text-align: center;
+    border-radius: 10px;
+    width: 80% !important;
+    margin-left: 10% !important;
+    height: 80px;
+    padding-top: 30px;
+}
+
+.toggleTitleModelos {
+    color: black;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    text-align: center;
+    border-radius: 10px;
+    width: 60% !important;
+    margin-left: 20% !important;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggleTitleActive {
+    background-color: #b3b3b3;
+}
+
+.toggleItem {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+}
+
+.toggleItemActive {
+    background-color: #E5E5E5;
+}
+
+.modeloButtonImage {
+    float: right;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+.modeloButtonText {
+    float: left;
+    margin-left: 20px;
+}
+
+.semProjeto {
+    color: #6A6A6A !important;
+    background-color: #b3b3b3 !important;
+}
+
+
+/*localização*/
+
+div .localidade label button {
+    display: inline;
+}
+
+.localidade {
+    padding-bottom: 5px !important;
+    padding-top: 5px !important;
+}
+
+.locationWrapper {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 1px;
+}
+
+.locationForm {
+    margin-bottom: 0px !important;
+}
+
+.gpsNow {
+    /*
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    */
+    border-radius: 10px !important;
+    font-size: 28px !important;
+}
+
+.scroll {
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 50%;
+    margin-top: 0px;
+}
+
+
+/*onde plantar*/
+
+.zonaWrapper {
+    text-align: center;
+    margin-top: 50px !important;
+}
+
+.zonaSelector {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    height: 80px !important;
+    width: 60% !important;
+}
+
+
+/*distribuição*/
+
+div.distribute {
+    margin-left: calc(50% - 80px);
+    height: 150px;
+    width: 150px;
+    margin-bottom: 30px;
+    text-align: center;
+    z-index: 5;
+    background: #bfbfbf;
+    opacity: 0.5;
+}
+
+div.distribute:active {
+    border-width: 2px;
+    border: solid;
+    border-color: blue;
+}
+
+.plantio {
+    height: 150px;
+    width: 150px;
+}
+
+.overFrame {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+/*carro chefe*/
+
+.toggleItemCC {
+    border-radius: 0px;
+    width: 80% !important;
+    margin-left: 10%;
+    font-size: 13px !important;
+}
+
+.CCvazio {
+    color: #6A6A6A !important;
+    background-color: #b3b3b3 !important;
+}
+
+.CCDrop {
+    max-height: 200px;
+    padding: 0 2px 2px 2px !important;
+}
+
+
+/*biodiversidade*/
+
+.listSpecies {
+    width: 100%;
+    border-radius: 15px;
+    border: solid;
+    border-width: 3px;
+    border-color: #127948;
+    padding: 4px;
+    font-size: 18px;
+}
+
+.innerList {
+    margin: 1px 3px 1px 3px !important;
+    border-radius: 15px;
+    border: none;
+}
+
+a.bioGrupos:active {
+    color: red;
+}
+
+.bioDrop {
+    max-height: 200px;
+    padding: 0 2px 2px 2px !important;
+}
+
+.toggleTotalBio {
+    font-weight: bold;
+    width: 100%;
+    background-color: #b3b3b3;
+    font-size: 18px;
+    color: black;
+    border-radius: 10px;
+    height: 24px;
+    padding-top: 3px;
+}
+
+.toggleTitleBio {
+    margin-top: 20px;
+}
+
+.toggleItemBio {
+    border-radius: 0px;
+    font-size: 13px !important;
+    width: 70%;
+}
+
+
+/*grid*/
+
+.gridCell {
+    font-size: 10px;
+    font-weight: bold;
+    border: solid;
+    border-width: 1px;
+    background-color: white;
+    border-color: black;
+    text-align: center;
+    overflow: hidden !important;
+    width: 20px !important;
+    max-width: 20px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    max-height: 20px !important;
+    min-height: 20px !important;
+}
+
+
+/*compartilhar*/
+
+.botaoCompartilha {
+    height: 70px !important;
+    width: 90% !important;
+    margin-left: 5% !important;
+}
+
+
+/*enciclopedia*/
+
+.tabelaEnciclopedia {
+    display: table-cell;
+    vertical-align: middle;
+    text-indent: 5px;
+    border: 1px solid #bbb;
+    white-space: nowrap;
+    padding: 12px 5px 12px 5px;
+    text-align: left;
+    height: 30px;
+    font-size: 20px;
+}
+
+.headerEnciclopedia {
+    background-color: #127948;
+    color: white;
+}
+
+.showBars .ng-animate .scroll-bar {
+    visibility: visible !important;
+}
+
+.showBars .scroll-bar-indicator {
+    background: rgba(144, 153, 144, 1) !important;
+}
+
+.showBars .scroll-bar-fade-out {
+    opacity: 1 !important;
+}
+
+.showBars .scroll-bar-h {
+    top: 3px !important;
+    height: 6px !important;
+}
+
+
+/*enciclopédia espécie*/
+
+.nomeCientifico {
+    width: 100%;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.imgArvore {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.topicoTituloEspecie {
+    background-color: #127948;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.especieUso {
+    background-color: rgb(226, 240, 217);
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    margin-bottom: 5px;
+}
+
+
+/*seleciona especie SAF*/
+
+.colCalendario {
+    width: 50px !important;
+    max-width: 50px !important;
+    min-width: 50px !important;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.colPrimColuna {
+    min-width: 100px;
+    width: 100px;   
+    vertical-align: middle;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.colCiclo {
+    min-width: 80px;
+    width: 100px;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*tbody, thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}*/
+
+
+/*croqui SAF*/
+
+.descritorEspecie {
+    margin-left: 20px;
+}
+
+.croquiContainer {
+    padding-right: 20px;
+}
+
+.croquiCells {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.croquiLine {
+    margin-right: 30px !important;
+    padding-left: 0 !important;
+    max-width: 40px;
+    width: 40px;
+}
+
+.croquiSpace {
+    border: 1px solid black;
+    min-height: 30px;
+    height: 30px;
+    max-width: 0px;
+    margin-left: 19.5px;
+}
+
+#setaCova {
+    display: inline-block;
+    transform: rotate(90deg);
+}
+
+
+/* seleção atividades*/
+
+.prescColumn {
+    white-space: nowrap;
+}
+
+
+/*fluxo de caixa*/
+
+.panelFC {
+    border-style: solid;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.panelCusto {
+    background-color: #FFC3AC;
+}
+
+.panelReceita {
+    background-color: #CAF0B5;
+}
+
+.subTitleFC {
+    margin-left: 40px;
+    text-align: left;
+}
+
+.contentFC {
+    vertical-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/*action sheet*/
+.platform-android .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+    text-align: center;
+}
+
+.platform-android .action-sheet .button {
+    border-color: #e2e2e2;
+    color: #104e89;
+}
+
+.header .title{
+    text-overflow: initial !important;
+}

@@ -1,0 +1,42 @@
+<ion-view>
+    <ion-nav-title>Espaçamento</ion-nav-title>
+        
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(73)" class="helpPhrase">Defina os valores <b>mínimos</b> de espaçamento no plantio:</p>
+        </div>
+
+        <label class="item item-input item-text-wrap localidade">
+            <span class="input-label">Entre linhas (m)</span>
+            <input type="number" ng-model="espacamento.linhas" placeholder="metros" step="0.1" />
+        </label>
+
+        <label class="item item-input item-text-wrap localidade">
+            <span class="input-label">Entre covas na linha (m)</span>
+            <input type="number" ng-model="espacamento.plantas" placeholder="metros" step="0.1" />
+        </label>
+
+        <div class="spacer" style="height: 20px;"></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(74)" class="helpPhrase">Defina as dimensões do croqui:</p>
+        </div>
+
+        <label class="item item-input item-text-wrap localidade">
+            <span class="input-label">N de linhas</span>
+            <input type="number" ng-model="espacamento.croquiLinhas" placeholder="linhas" />
+        </label>
+
+        <label class="item item-input item-text-wrap localidade">
+            <span class="input-label">N de covas por linha</span>
+            <input type="number" ng-model="espacamento.croquiPlantas" placeholder="plantas" />
+        </label>
+
+
+        <a class="button button-stable  button-block buttonStyle {{bg}}" on-touch="setDims();bg = 'buttonStyleClicked'" on-release="bg=''">OK</a>
+
+    </ion-content>
+</ion-view>

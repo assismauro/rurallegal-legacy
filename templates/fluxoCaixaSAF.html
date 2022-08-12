@@ -1,0 +1,120 @@
+<ion-view>
+    <ion-nav-title>Fluxo de caixa</ion-nav-title>
+    <ion-content padding="false" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div class="row" style="height:90vh;max-height:90vh;min-height:90vh">
+
+            <div class="col" style="width:30vw;max-width:30vw" ng-show="show.leftPanel">
+
+                <div style="text-align:center;margin-bottom:10px">Opções de visualização</div>
+
+                <ion-checkbox class="item-text-wrap" ng-model="defArea.descontar" ng-click="geraGrafico();">Valores descontados (6% a.a.)</ion-checkbox>
+
+                <ion-checkbox class="item-text-wrap" ng-model="show.chart" on-tap="zoomOut()">Mostrar gráfico</ion-checkbox>
+
+                <ion-scroll zooming="false" direction="y" class="scrollable-list" style="max-height:33vh">
+                    <ul class="list">
+                        <li style="text-align:left;">
+                            <b><a on-tap="linkHelp(76)">VPL</a> (R$/ha):</b> {{indicadores.VPLHa.toFixed(2)}}
+                            <br><br>                            
+                        </li>
+
+                        <li style="text-align:left;">
+                            <b><a on-tap="linkHelp(77)">VPL periodizado</a> (R$/ha/{{tempo.intervalo.view.toLowerCase()}}):</b> {{indicadores.VPLaHa.toFixed(2)}}
+                            <br><br>                            
+                        </li>
+
+                        <li style="text-align:left;">
+                            <b><a on-tap="linkHelp(79)">Benefício/custo</a> (R$ receita/R$ investido):</b>
+                            {{indicadores.BC.toFixed(2)}}
+                            <br><br>
+                        </li>
+
+                        <li style="text-align:left;">
+                            <b><a on-tap="linkHelp(78)">TIR</a> (%):</b> {{indicadores.TIR.toFixed(2)}}
+                        </li>      
+                    </ul>
+                </ion-scroll>
+
+                <a class="button button-stable  button-block buttonStyle {{bg}}" on-tap="bg = 'buttonStyleClicked';finalizaSAF()" on-release="bg=''">Finalizar</a>
+            </div>
+
+            <div style="border: 1px solid black;height:inherit;"></div>
+
+            <div class="col" style="width:{{show.rightWidth}};max-width:{{show.rightWidth}}">
+
+                <div style="width:inherit;text-align:center">
+                    <span on-tap="expandeTela()">
+                    <i ng-show="show.leftPanel" class="icon ion-arrow-expand" style="font-size:30px"></i>
+                    <i ng-hide="show.leftPanel" class="icon ion-arrow-shrink" style="font-size:30px"></i>
+                    </span>
+                </div>
+
+                <ion-scroll delegate-handle="gantt" zooming="true" direction="xy" style="height:85vh;max-height:85vh;min-height:85vh;width:100%">
+
+                    <table ng-hide="show.chart" style="text-align:center">
+                        <!-- períodos do HP -->
+                        <tr class="panelFC">
+                            <td class="colPrimColuna">{{tempo.intervalo.view}} do HP</td>
+
+                            <td class="colCalendario" ng-repeat="i in horizonte">{{i}}</td>
+                        </tr>
+
+                        <!-- custos -->
+                        <tr class="panelFC panelCusto">
+                            <td></td>
+                            <td class="subTitleFC" colspan="{{timeLength}}">Custos (R${{defArea.string}})</td>
+                        </tr>
+
+                        <!-- custo por operação -->
+                        <tr ng-repeat="c in custoOperacoes">
+                            <td class="colPrimColuna prescColumn">{{c}}</td>
+
+                            <td class="contentFC" ng-repeat="i in horizonte">{{retornaValor(i, c, true)}}</td>
+                        </tr>
+
+                        <!-- subtotal custos -->
+                        <tr class="panelFC panelCusto">
+                            <td class="colPrimColuna prescColumn">Subtotal</td>
+
+                            <td class="contentFC" ng-repeat="sub in FC">{{retornaTotais(sub, false, true)}}</td>
+                        </tr>
+
+
+                        <!-- receitas -->
+                        <tr class="panelFC panelReceita">
+                            <td></td>
+                            <td class="subTitleFC" colspan="{{timeLength}}">Receitas (R${{defArea.string}})</td>
+                        </tr>
+
+                        <!-- receita por espécie -->
+                        <tr ng-repeat="r in receitaEspecies">
+                            <td class="colPrimColuna prescColumn">{{r}}</td>
+
+                            <td class="contentFC" ng-repeat="i in horizonte">{{retornaValor(i, r, false)}}</td>
+                        </tr>
+
+                        <!-- subtotal receitas -->
+                        <tr class="panelFC panelReceita">
+                            <td class="colPrimColuna prescColumn">Subtotal</td>
+                            <td class="contentFC" ng-repeat="sub in FC">{{retornaTotais(sub, false, false)}}</td>
+                        </tr>
+
+                        <!-- total acumulado -->
+                        <tr class="panelFC">
+                            <td class="colPrimColuna prescColumn">Total acumulado (R${{defArea.string}})</td>
+                            <td class="contentFC" ng-repeat="ac in FC">{{retornaTotais(ac)}}</td>
+                        </tr>
+                    </table>
+
+                    <canvas id="lineSaf" class="chart chart-line" chart-data="chartData" chart-labels="horizonte" chart-series="series" chart-options="options" ng-show="show.chart" style="width:100%;"></canvas>
+
+                </ion-scroll>
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>

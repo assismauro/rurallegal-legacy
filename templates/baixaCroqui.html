@@ -1,0 +1,26 @@
+<ion-view>
+    <ion-nav-title>Exportar SAF</ion-nav-title>
+        
+    <ion-content padding="true" class="has-header">
+
+        <div class="backGround" ng-show="loading"><i class="icon ion-load-d spinner"></i></div>
+
+        <div style="text-align:center;" class="show-list-numbers-and-dots">
+            <p on-tap="linkHelp(75)" class="helpPhrase">Escolha como salvar ou compartilhar o modelo:</p>
+        </div>
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" on-touch="downXLS()"><span style="color:darkgreen">Excel</span></button>
+
+        <button class="botaoCompartilha button button-balanced button-block" on-tap="share()"><i class="icon ion-android-share-alt"></i></button>
+
+        <div class="spacer" style="height:30px;"></div>
+
+        <button class="botaoCompartilha button button-dark button-block" on-tap="emailXLS()"><i class="icon ion-ios-email"></i>&nbsp &nbsp Receber via email</button>
+
+        <div class="spacer" style="height: 30px;"></div>
+
+        <button class="botaoCompartilha button button-stable button-block" ui-sref="home"><i class="icon ion-home"></i></button>
+
+    </ion-content>
+</ion-view>
